@@ -3,6 +3,8 @@ import { defineConfig } from 'vite';
 
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 
+import { resolve } from 'path';
+
 // вызываем функцию, которая вернет свойства по умолчанию и те свойства, что мы прописали
 export default defineConfig({
     root: './src', // корень проекта - папка src
@@ -10,7 +12,13 @@ export default defineConfig({
 
     // указываем, где создавать build
     build: {
-        outDir: '../dist'// папка, куда будет складываться проект
+        outDir: '../dist', // папка, куда будет складываться проект
+        rollupOptions: {
+            input: {
+                main: resolve(__dirname, './src/index.html'),
+                store: resolve(__dirname, './src/store.html')
+            }
+        }
     },
 
     plugins: [
